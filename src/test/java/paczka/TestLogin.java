@@ -1,6 +1,7 @@
 package paczka;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import loginPackage.HomeLocator;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,17 +26,20 @@ public class TestLogin {
     public static void setUp(){
         driver = new FirefoxDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-    }
-    /*
-    @Test
-    public void testLoginPage() {
-        driver.navigate().to("http://my.pgs-soft.com/");
-        Assert.assertEquals("Logowanie", driver.getTitle());
-        WebElement userNameInput = driver.findElement(By.id("userNameBox"));
-        userNameInput.sendKeys("login");
 
     }
-    */
+
+    @Test
+    public void testLoginPage() {
+
+        driver.navigate().to("https://testingcup.pgs-soft.com");
+        Home home = new Home(driver);
+        home.click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginAs("tester","123-xyz");
+
+    }
+
     /*
     @Test
 
@@ -83,14 +87,14 @@ public class TestLogin {
 
     }
     */
-    public boolean isElementPresent(By by){
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
+//    public boolean isElementPresent(By by){
+//        try {
+//            driver.findElement(by);
+//            return true;
+//        } catch (NoSuchElementException e) {
+//            return false;
+//        }
+//    }
 
     @AfterClass
     public static void tearDown() {
